@@ -76,6 +76,12 @@ prepare() {
   git config user.email "build@localhost" && git config user.name "builder"
   git add -A && git commit --no-gpg-sign -m "Sample commit"
   popd >/dev/null
+
+if [ $(echo "${ARTIFACT_URL}" | grep . |wc -l) == 1  ]; then
+        cd /opt/app-root/src/ && git clone ${ARTIFACT_URL}
+        else
+        echo  "No ARTIFACT_URL, START CONFIG TEST"
+fi
 }
 
 run_test_application() {
