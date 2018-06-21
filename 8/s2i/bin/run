@@ -7,6 +7,12 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
+if [ $(echo "${ARTIFACT_URL}" | grep . |wc -l) == 1  ]; then
+        cd /opt/app-root/src/ && git clone ${ARTIFACT_URL}
+        else
+        echo  "No ARTIFACT_URL, START CONFIG TEST"
+fi
+
 set -e
 
 if [ -e "/opt/app-root/etc/generate_container_user" ]; then
